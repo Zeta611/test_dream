@@ -1,6 +1,6 @@
 FROM ocaml/opam:alpine as build
 
-RUN sudo apk add --update libev-dev openssl-dev
+RUN sudo apk add --update libev-dev openssl-dev gmp-dev
 
 WORKDIR /home/opam
 
@@ -12,7 +12,7 @@ RUN opam install . --deps-only
 ADD . .
 RUN opam exec -- dune build
 
-FROM alpine:3.18.4 as run
+FROM alpine:3.22.1 as run
 
 RUN apk add --update libev
 
